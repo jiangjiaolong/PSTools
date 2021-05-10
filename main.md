@@ -2,9 +2,10 @@
 
 
 
-```
-# base64
 
+base64
+
+```
 function Base64 {
     param (
         [Parameter(Mandatory,ValueFromPipeline)]
@@ -26,9 +27,11 @@ function Base64 {
         }
     }
 }
+```
 
-# http client
+http client
 
+```
 function Open-Url {
     param (
         [Parameter(Mandatory)]
@@ -36,7 +39,11 @@ function Open-Url {
     )
     (New-Object System.Net.WebClient).DownloadString($Url)
 } 
+```
 
+文件下载
+
+```
 function Download-File {
     param (
         [Parameter(Mandatory)]
@@ -46,9 +53,11 @@ function Download-File {
     )
     (New-Object System.Net.WebClient).DownloadFile($Url,$OutFile)
 }
+```
 
-# IP Scan
+IP Scan
 
+```
 function Scan-IP {
     param (
         [Parameter(Mandatory)][string]$Network
@@ -69,6 +78,7 @@ function Scan-IP {
     }
 }
 
+
 function ScanIPFromTXT {
     param (
         [Parameter(Mandatory)][string]$filename
@@ -80,10 +90,11 @@ function ScanIPFromTXT {
         if ($tool.Send($CurrentIP, 1).Status -eq "Success") { $CurrentIP }
     }
 }
+```
 
+http server
 
-# http server
-
+```
 function Start-HttpServer {
     param (
         # Parameter help description
@@ -169,4 +180,3 @@ function ftpupload {
     $response.Close();
 }
 ```
-
