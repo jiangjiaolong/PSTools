@@ -31,7 +31,7 @@ function Base64 {
 
 http client
 
-```
+```powershell
 function Open-Url {
     param (
         [Parameter(Mandatory)]
@@ -43,7 +43,7 @@ function Open-Url {
 
 文件下载
 
-```
+```powershell
 function Download-File {
     param (
         [Parameter(Mandatory)]
@@ -57,7 +57,7 @@ function Download-File {
 
 IP Scan
 
-```
+```powershell
 function Scan-IP {
     param (
         [Parameter(Mandatory)][string]$Network
@@ -94,7 +94,7 @@ function ScanIPFromTXT {
 
 http server
 
-```
+```powershell
 function Start-HttpServer {
     param (
         # Parameter help description
@@ -132,7 +132,7 @@ function Start-HttpServer {
 
 从URL安装MSI
 
-```
+```powershell
 function Install-MSI {
     param (
         [Parameter(Mandatory)]
@@ -158,7 +158,7 @@ function Install-MSI {
 
 FTP上传
 
-```
+```powershell
 function ftpupload {
     param (
         $ftpurl, $username, $password, $filepath
