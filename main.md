@@ -5,7 +5,7 @@
 
 base64
 
-```
+```powershell
 function Base64 {
     param (
         [Parameter(Mandatory,ValueFromPipeline)]
