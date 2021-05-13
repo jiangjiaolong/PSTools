@@ -10,10 +10,10 @@ function Base64 {
     param (
         [Parameter(Mandatory,ValueFromPipeline)]
         [string]$Text,
-        [bool]$decode = $false,
-        [bool]$Unicode = $false
+        [switch]$Decode,
+        [switch]$Unicode
     )
-    if ($decode){
+    if ($Decode){
         if ($Unicode){
             [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($Text))
         }else{
@@ -180,3 +180,46 @@ function ftpupload {
     $response.Close();
 }
 ```
+
+导出excel文件
+
+```powershell
+function Export-Xlsx {
+    param (
+        [Parameter(Mandatory, ValueFromPipeline)][PSCustomObject] $psobject,
+        [Parameter(Mandatory)][string] $Path,
+        [switch] $Force
+    )
+
+    if (1 -eq ($Path -split '\\').Count -and (1 -eq ($Path -split '\/').Count)) {
+        $Path = $(Get-Location).Path + "\${Path}"
+    }
+    if (Test-Path $Path) {
+        if ($Force) {
+            Remove-Item $Path -Force
+        }
+        else {
+            Write-Output "文件已存在！"
+            Write-Output $Force
+            return
+        }
+    }
+
+    $excel = New-Object -ComObject Excel.Application
+    $workbook = $excel.Workbooks.add()
+    $sheet = $workbook.worksheets.Item(1)
+    $row = 1
+    foreach ($item in $psobject | ConvertTo-Csv) {
+        $col = 1
+        foreach ($data in ($item -split ",")) {
+            $sheet.cells.item($row, $col) = $data.TrimStart('"').TrimEnd('"')
+            $col++
+        }
+        $row++
+    }
+
+    $workbook.SaveAs($Path)
+    $excel.Quit()
+}
+```
+
