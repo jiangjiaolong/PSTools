@@ -200,7 +200,6 @@ function Export-Xlsx {
         }
         else {
             Write-Output "文件已存在！"
-            Write-Output $Force
             return
         }
     }
